@@ -64,7 +64,7 @@ def generate_secrets_file(payments_file_path, secrets_file_path=None):
 
 
 def run_cli():
-    """ Wrapper function for testing purposes"""
+    """ Main function. Using a main wrapper function helps in driving tests. """
     args = docopt(__doc__, version='Axie Scholar Payments CLI v1.3')
     if args['payout']:
         payments_file_path = args['<payments_file>']

@@ -36,6 +36,7 @@ class Payment:
             self.nonce = max(get_nonce(self.from_acc), nonce)
 
     async def execute(self):
+        """ Execute the payout for this payment. """
         # Prepare transaction
         with open("axie/slp_abi.json") as f:
             slb_abi = json.load(f)
@@ -147,6 +148,8 @@ class AxiePaymentsManager:
         return True
 
     def prepare_payout(self):
+        """ Execute the payout.
+        """
         for acc in self.scholar_accounts:
             fee = 0
             total_payments = 0
@@ -225,6 +228,7 @@ class AxiePaymentsManager:
                              "Insufficient funds!")
 
     def payout_account(self, acc_name, payment_list):
+        """ Execute the payout for each payment in the payment list. """
         logging.info(f"Payments for {acc_name}:")
         logging.info(",\n".join(str(p) for p in payment_list))
         accept = "y" if self.auto else None
