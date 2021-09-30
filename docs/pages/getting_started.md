@@ -24,6 +24,13 @@ directory.
 
 Create a payments.json file: axie-scholar-utilities/source/payments.json
 
+* AccountAddress - the account where the payment will come from
+* ScholarPayoutAddress - the scholar's address where the payout will be sent
+* ScholarPayout - amount of SLP that the scholar will receive
+* TrainerPayoutAddress - (optional) the account of the trainer where the payout will be sent
+* TranerPayout - amout of SLP that the trainer will receive
+* ManagerPayout - amout of SLP that the manager will receive
+
 ```
 {
     "Manager": "ronin:<Manager address here>",
