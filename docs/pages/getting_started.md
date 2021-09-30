@@ -10,10 +10,9 @@ Install Poetry by running this command.
 
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
 
-See the [GitHub repo](https://github.com/python-poetry/poetry) If you want to
-learn more about Poetry.
+You can also check the [Poetry Installation Guide](https://python-poetry.org/docs/#installation).
 
-### Install Rependencies
+### Install Dependencies
 Install the project dependencies by running poetry install in the source
 directory.
 
@@ -23,7 +22,7 @@ directory.
 # Setup
 ## Prepare The Payments File
 
-Create a payments.json file.
+Create a payments.json file: axie-scholar-utilities/source/payments.json
 
 ```
 {
