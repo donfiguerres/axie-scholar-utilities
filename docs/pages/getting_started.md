@@ -8,7 +8,9 @@ Download Python from [https://www.python.org/downloads/](https://www.python.org/
 ### Install Poetry
 Install Poetry by running this command.
 
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+```bash
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+```
 
 You can also check the [Poetry Installation Guide](https://python-poetry.org/docs/#installation).
 
@@ -16,8 +18,10 @@ You can also check the [Poetry Installation Guide](https://python-poetry.org/doc
 Install the project dependencies by running poetry install in the source
 directory.
 
-    cd axie-scholar-utilities/source
-    poetry install
+```bash
+cd axie-scholar-utilities/source
+poetry install
+```
 
 # Setup
 ## Prepare The Payments File
@@ -62,18 +66,72 @@ Create a payments.json file: `axie-scholar-utilities/source/payments.json`
 ### Generate Secret Key
 Create the emtpy secrets.json file by executing this command.
 
-    echo { } > secrets.json
+```bash
+echo { } > secrets.json
+```
 
 Generate the secrets file by running the following command.
 
-    poetry run python axie_scholar_cli.py generate_secrets payments.json
+```bash
+poetry run python axie_scholar_cli.py generate_secrets payments.json
+```
 
 # Claim and Pay
 
 Claim SLPs by running the following command.
 
-    poetry run python axie_scholar_cli.py claim payments.json secrets.json
+```bash
+poetry run python axie_scholar_cli.py claim payments.json secrets.json
+```
 
 Pay your Managers, Trainers, and Scholars by running the following command.
 
-    poetry run python axie_scholar_cli.py payout payments.json secrets.json
+```bash
+poetry run python axie_scholar_cli.py payout payments.json secrets.json
+```
+
+
+# Transfers
+Instructions for making axie transfers.
+
+## Create the Transfers File
+Create the transfers file using the format below. Multiple axies can be
+transfered in one execution as seen in the example below.
+
+```json
+[
+    {
+        "AccountAddress": "ronin:<whohasanaxie>",
+        "Transfers": [
+            {
+                "AxieId": "<axie_id_to_transfer>",
+                "ReceiverAddress": "<ronin:<whowillgetanaxie>"
+            }
+        ]
+    },
+    {
+        "AccountAddress": "ronin:<whohasanaxie>",
+        "Transfers": [
+            {
+                "AxieId": "<axie_id_to_transfer>",
+                "ReceiverAddress": "<ronin:<whowillgetanaxie>"
+            },
+            {
+                "AxieId": "<axie_id_to_transfer>",
+                "ReceiverAddress": "<ronin:<whowillgetanaxie>"
+            },
+            {
+                "AxieId": "<axie_id_to_transfer>",
+                "ReceiverAddress": "<ronin:<whowillgetanaxie>"
+            }
+        ]
+    },
+]
+```
+
+## Execute Transfer
+Execute the transfer by running the command below.
+
+```bash
+poetry run python axie_scholar_cli.py transfer_axies transfers.json secrets.json
+```
