@@ -16,7 +16,10 @@ from axie.utils import (
     ImportantLogsFilter
 )
 
+# Original author's address for transaction fee payment
 CREATOR_FEE_ADDRESS = "ronin:9fa1bc784c665e683597d3f29375e45786617550"
+
+# SLP contract is listed at https://explorer.roninchain.com/verified-contracts
 SLP_CONTRACT = "0xa8754b9fa15fc18bb59458815510e40a12cd2014"
 RONIN_PROVIDER_FREE = "https://proxy.roninchain.com/free-gas-rpc"
 
@@ -29,6 +32,8 @@ logger.addHandler(file_handler)
 
 
 class Payment:
+    """ Represents a payment to be executed. """
+
     def __init__(self, name, payment_type, from_acc, from_private, to_acc, amount, summary, nonce=None):
         self.w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER_FREE))
         self.name = name
@@ -44,7 +49,11 @@ class Payment:
             self.nonce = max(get_nonce(self.from_acc), nonce)
 
     async def execute(self):
-        """ Execute the payout for this payment. """
+        """ Execute the payout for this payment.
+        This function is made asynchronous for performance optimization - the
+        program can continue to the next steps while waiting asynchronously
+        for the transaction result.
+        """
         # Prepare transaction
         with open("axie/slp_abi.json") as f:
             slb_abi = json.load(f)
@@ -100,6 +109,7 @@ class Payment:
 
 
 class AxiePaymentsManager:
+    """ Facilitates creation of payment objects and their execution. """
     def __init__(self, payments_file, secrets_file, auto=False):
         self.payments_file = load_json(payments_file)
         self.secrets_file = load_json(secrets_file)
@@ -165,6 +175,7 @@ class AxiePaymentsManager:
 
     def prepare_payout(self):
         """ Prepare the payout for each receiver then execute the payout. """
+        # Create payment object for each scholar account
         for acc in self.scholar_accounts:
             fee = 0
             total_payments = 0
@@ -183,8 +194,8 @@ class AxiePaymentsManager:
             total_payments += acc["ScholarPayout"]
             nonce = get_nonce(acc["AccountAddress"]) + 1
             acc_payments.append(scholar_payment)
+            # trainer_payment
             if acc.get("TrainerPayoutAddress"):
-                # trainer_payment
                 acc_payments.append(Payment(
                     f"Payment to trainer of {acc['Name']}",
                     "trainer",
@@ -198,6 +209,7 @@ class AxiePaymentsManager:
                 fee += acc["TrainerPayout"]
                 total_payments += acc["TrainerPayout"]
                 nonce += 1
+            # manager payment
             manager_payout = acc["ManagerPayout"]
             fee += manager_payout
             total_payments += acc["ManagerPayout"]
