@@ -3,7 +3,7 @@ Here's a step-by-step guide more suitable for Python beginners.
 
 ## Installation
 ### Python
-Download Python from [https://www.python.org/downloads/](https://www.python.org/downloads/).
+Download Python from [https://www.python.org/downloads/](https://www.python.org/downloads/) then install.
 
 ### Install Poetry
 Install Poetry by running this command.
