@@ -32,7 +32,7 @@ logger.addHandler(file_handler)
 
 
 class Payment:
-    """ Represents a payment to be executed. """
+    """Represents a payment to be executed."""
 
     def __init__(self, name, payment_type, from_acc, from_private, to_acc, amount, summary, nonce=None):
         self.w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER_FREE))
@@ -49,7 +49,9 @@ class Payment:
             self.nonce = max(get_nonce(self.from_acc), nonce)
 
     async def execute(self):
-        """ Execute the payout for this payment.
+        """
+        Execute the payout for this payment.
+
         This function is made asynchronous for performance optimization - the
         program can continue to the next steps while waiting asynchronously
         for the transaction result.
@@ -109,7 +111,7 @@ class Payment:
 
 
 class AxiePaymentsManager:
-    """ Facilitates creation of payment objects and their execution. """
+    """Facilitates creation of payment objects and their execution."""
     def __init__(self, payments_file, secrets_file, auto=False):
         self.payments_file = load_json(payments_file)
         self.secrets_file = load_json(secrets_file)
@@ -174,7 +176,7 @@ class AxiePaymentsManager:
         return True
 
     def prepare_payout(self):
-        """ Prepare the payout for each receiver then execute the payout. """
+        """Prepare the payout for each receiver then execute the payout."""
         # Create payment object for each scholar account
         for acc in self.scholar_accounts:
             fee = 0
