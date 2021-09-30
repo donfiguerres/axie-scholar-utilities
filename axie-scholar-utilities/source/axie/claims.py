@@ -21,6 +21,7 @@ logger.addHandler(file_handler)
 
 
 class Claim:
+    """ Represents a claim action for one account. """
     def __init__(self, account, private_key):
         self.w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER_FREE))
         with open("axie/slp_abi.json") as f:
