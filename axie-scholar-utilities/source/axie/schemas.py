@@ -6,7 +6,8 @@ payments_schema = {
     ],
     "properties": {
         "Manager": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^ronin:"
         },
         "Scholars": {
             "type": "array",
@@ -75,6 +76,42 @@ payments_schema = {
                         "type": "number",
                         "minimum": 0.01,
                         "maximum": 1
+                    }
+                }
+            }
+        }
+    }
+}
+
+transfers_schema = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": [
+            "AccountAddress",
+            "Transfers"
+        ],
+        "properties": {
+            "AccountAddress": {
+                "type": "string",
+                "pattern": "^ronin:"
+            },
+            "Transfers": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": [
+                        "AxieId",
+                        "ReceiverAddress"
+                    ],
+                    "properties": {
+                        "AxieId": {
+                            "type": "number"
+                        },
+                        "ReceiverAddress": {
+                            "type": "string",
+                            "pattern": "^ronin:"
+                        }
                     }
                 }
             }

@@ -16,6 +16,23 @@ class ImportantLogsFilter(logging.Filter):
         return record.getMessage().startswith('Important:')
 
 
+class Singleton:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Singleton, cls).__new__(
+                                cls, *args, **kwargs)
+        return cls._instance
+
+    def clear(cls):
+        # We need this for testing purposes!
+        try:
+            del Singleton._instance
+        except AttributeError:
+            pass
+
+
 def check_balance(account):
     w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER))
     with open("axie/slp_abi.json") as f:

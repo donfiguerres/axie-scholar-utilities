@@ -12,7 +12,7 @@ Check the format on the index page of this wiki, but in general what I recommend
 
 2. Have a secrets.json file that only contains this inside:
 
-        {}
+        { }
 
 3. A file named results.log that is empty.
 
@@ -41,3 +41,9 @@ This will execute the payments defined in payments.json. Results.log will be upd
 If you do now want to confirm account by account, you can run this other command (result will be the same):
 
     axie-utils-auto-payout payments.json secrets.json results.log
+
+## Axie Transfers
+
+For this command to work, remmember you will need to have in the folder the json file called transfers.json. The command will be as follows:
+
+    axie-utils-transfer-axies transfers.json secrets.json
