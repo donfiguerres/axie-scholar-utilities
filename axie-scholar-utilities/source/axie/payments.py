@@ -164,8 +164,7 @@ class AxiePaymentsManager:
         return True
 
     def prepare_payout(self):
-        """ Execute the payout.
-        """
+        """ Prepare the payout for each receiver then execute the payout. """
         for acc in self.scholar_accounts:
             fee = 0
             total_payments = 0
