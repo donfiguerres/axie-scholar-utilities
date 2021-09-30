@@ -4,6 +4,10 @@
 
 In these pages we will cover all the information you need to install and use axie scholar utilities tool.
 
+# Step-by-step Guide
+For beginners who are not familiar with Python, see this
+[step-by-step guide](./pages/getting_started.md).
+
 # How to install this tool
 ## Install Using Docker
 This is the recomended way of installing and using my tool. Follow one of these links for installing with docker:
