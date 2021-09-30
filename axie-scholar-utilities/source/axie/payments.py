@@ -32,7 +32,10 @@ logger.addHandler(file_handler)
 
 
 class Payment:
-    """Represents a payment to be executed."""
+    """Represents a payment to be executed.
+    The web3 library is used for making a transaction.
+    https://web3py.readthedocs.io/en/stable/index.html
+    """
 
     def __init__(self, name, payment_type, from_acc, from_private, to_acc, amount, summary, nonce=None):
         self.w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER_FREE))
