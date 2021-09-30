@@ -11,6 +11,8 @@ from web3 import Web3, exceptions
 from axie.schemas import transfers_schema
 from axie.utils import get_nonce, load_json, ImportantLogsFilter
 
+
+# SLP contract is listed at https://explorer.roninchain.com/verified-contracts
 RONIN_PROVIDER_FREE = "https://proxy.roninchain.com/free-gas-rpc"
 AXIE_CONTRACT = "0x32950db2a7164ae833121501c797d79e7b79d74c"
 
@@ -23,6 +25,7 @@ logger.addHandler(file_handler)
 
 
 class Transfer:
+    """Represents a transfer to be executed."""
     def __init__(self, from_acc, from_private, to_acc, axie_id, nonce=None):
         self.w3 = Web3(Web3.HTTPProvider(RONIN_PROVIDER_FREE))
         self.from_acc = from_acc.replace("ronin:", "0x")
@@ -120,6 +123,10 @@ class AxieTransferManager:
         logging.info("Files correctly validated!")
 
     def prepare_transfers(self):
+        """
+        Create transfer objects for each transer listed in the transfers file
+        and execute the transfer.
+        """
         transfers = []
         logging.info("Preparing transfers")
         for acc in self.transfers_file:
