@@ -22,7 +22,7 @@ directory.
 # Setup
 ## Prepare The Payments File
 
-Create a payments.json file: axie-scholar-utilities/source/payments.json
+Create a payments.json file: `axie-scholar-utilities/source/payments.json`
 
 * AccountAddress - the account where the payment will come from
 * ScholarPayoutAddress - the scholar's address where the payout will be sent
@@ -31,7 +31,7 @@ Create a payments.json file: axie-scholar-utilities/source/payments.json
 * TranerPayout - amout of SLP that the trainer will receive
 * ManagerPayout - amout of SLP that the manager will receive
 
-```
+```json
 {
     "Manager": "ronin:<Manager address here>",
     "Scholars":[
@@ -43,9 +43,16 @@ Create a payments.json file: axie-scholar-utilities/source/payments.json
             "TrainerPayoutAddress": "ronin:<trainer_address>",
             "TrainerPayout": 1,
             "ManagerPayout": 9
-        },
-        {...},
-        ...
+        }
+        {
+            "Name": "Scholar 2",
+            "AccountAddress": "ronin:<account_address>",
+            "ScholarPayoutAddress": "ronin:<scholar_address>",
+            "ScholarPayout": 10,
+            "TrainerPayoutAddress": "ronin:<trainer_address>",
+            "TrainerPayout": 1,
+            "ManagerPayout": 9
+        }
     ],
     "Donations": [
     ]
@@ -53,6 +60,10 @@ Create a payments.json file: axie-scholar-utilities/source/payments.json
 ```
 
 ### Generate Secret Key
+Create the emtpy secrets.json file by executing this command.
+
+    echo { } > secrets.json
+
 Generate the secrets file by running the following command.
 
     poetry run python axie_scholar_cli.py generate_secrets payments.json
